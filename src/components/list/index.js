@@ -26,7 +26,7 @@ const List = ({ hotspots }) => (
     <StyledList>
       {hotspots.map((hotspot, index) => {
         const itemNum = index + 1;
-
+        
         return (
           <ListItem key={uuidv4()}>
             {`${hotspot} #${itemNum}`}
