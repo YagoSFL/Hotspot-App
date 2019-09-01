@@ -1,4 +1,4 @@
-const INITIAL_STATE = ['hotspot1', 'hotspot2', 'hotspot3', 'hotspot4'];
+const INITIAL_STATE = [];
 
 export default (state = INITIAL_STATE, action) => {
   switch(action.type) {

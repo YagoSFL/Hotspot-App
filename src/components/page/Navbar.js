@@ -16,8 +16,8 @@ const NavItem = styled.li`
 const Navbar = ({ links }) => (
   <StyledNavbar>
     {links.map(item => (
-      <NavItem>
-        <Link>item</Link>
+      <NavItem key={item}>
+        <Link>{item}</Link>
       </NavItem>
     ))}
   </StyledNavbar>
