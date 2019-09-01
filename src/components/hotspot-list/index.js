@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import uuidv4 from 'uuidv4';
 
 import HeaderList from './HeaderList';
 import ListItem from './ListItem';
@@ -25,15 +24,11 @@ const List = ({ hotspots }) => (
   <Container>
     <HeaderList />
     <StyledList>
-      {hotspots.map((hotspot, index) => {
-        const itemNum = index + 1;
-        
-        return (
-          <ListItem key={uuidv4()}>
-            {`${hotspot} #${itemNum}`}
+      {hotspots.map(hotspot => (
+          <ListItem key={hotspot.name}>
+            {hotspot.name}
           </ListItem>
-        );
-      })}
+        ))}
     </StyledList>
   </Container>
 );

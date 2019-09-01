@@ -29,7 +29,7 @@ const Page = ({ navLinks, hotspots }) => {
           <Divider />
           <Content>
             <NewHotspotButton onClick={() => setCapturing(!isCapturing)} />
-            {hotspots.length > 1 && <HotspotList hotspots={hotspots} />}
+            {hotspots.length > 0 && <HotspotList hotspots={hotspots} />}
           </Content>
         </Capture>
       </StyledContainer>

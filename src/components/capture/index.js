@@ -1,5 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
+import { newHotspot } from '../../actions/hotspotActions';
+import { useSelector, useDispatch } from 'react-redux'
 
 import Spot from './Spot';
 
@@ -17,30 +19,49 @@ const CaptureOverlay = styled.div`
   `}
 `;
 
-let spotX = null;
-let spotY = null;
+const HotspotsContainer = ({ hotspotList }) => (
+  <>
+    {hotspotList.map(hotspot => {
+      const { positY, positX } = hotspot;
+      return (
+        <Spot
+          key={hotspot.name}
+          verticalPosit={positY}
+          horizontalPosit={positX}
+        />
+      )
+    })}
+  </>
+)
 
-const hotspotCapture = (event, callback) => {
-  spotX = event.clientX;
-  spotY = event.clientY;
-  callback()
+const hotspotCapture = (event, toggleCapture, dispatch, hotspotList) => {
+  event.preventDefault();  
+  dispatch(newHotspot(event, hotspotList));
+  toggleCapture()
 }
 
-const Capture = ({ show, children, onCapture }) => (
-  <>
-    {show 
-    ? (
-      <CaptureOverlay show={show} onClick={e => hotspotCapture(e, onCapture)}>
-        {children}
-      </CaptureOverlay>
-    )
-    : (
-      <div>
-        <Spot verticalPosit={spotY} horizontalPosit={spotX} />
-        {children}
-      </div>
-    )}
-  </>
-);
+const Capture = ({ show, children, onCapture }) => {
+const hotspotList = useSelector(state => state.hotspots);
+const dispatch = useDispatch();
+
+
+  return (
+    <>
+      {show 
+      ? (
+        <CaptureOverlay show={show} onClick={e => hotspotCapture(e, onCapture, dispatch, hotspotList)}>
+          <HotspotsContainer hotspotList={hotspotList} />
+          {children}
+        </CaptureOverlay>
+      )
+      : (
+        <div>
+          <HotspotsContainer hotspotList={hotspotList} />
+          {children}
+        </div>
+      )}
+    </>
+  );
+}
 
 export default Capture;
