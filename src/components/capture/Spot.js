@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
+import SpotPopover from './Popover';
 
-const Container = styled.div`
+const SpotContainer = styled.div`
   position: absolute;
   top: ${({ verticalPosit }) => `${verticalPosit}px`};
   left: ${({ horizontalPosit }) => `${horizontalPosit}px`};
@@ -28,15 +29,32 @@ const Pin = styled.div`
   opacity: 0.8;
 `;
 
-const Spot = ({ verticalPosit, horizontalPosit }) => (
-  <Container
-    verticalPosit={verticalPosit}
-    horizontalPosit={horizontalPosit}
-  >
-    <Circle>
-      <Pin />
-    </Circle>
-  </Container>
-);
+const Spot = ({
+  verticalPosit,
+  horizontalPosit,
+  spotIndex,
+  title,
+  message,
+ }) => {
+  const [isOpen, setOpen] = useState(false);
+  return (
+    <SpotPopover
+      isPopoverOpen={isOpen}
+      outSideClick={() => setOpen(false)}
+      title={title}
+      message={message}
+    >
+      <SpotContainer
+        verticalPosit={verticalPosit}
+        horizontalPosit={horizontalPosit}
+        onClick={() => setOpen(!isOpen)}
+      >
+        <Circle>
+          <Pin />
+        </Circle>
+      </SpotContainer>
+    </SpotPopover>
+  );
+}
 
 export default Spot;

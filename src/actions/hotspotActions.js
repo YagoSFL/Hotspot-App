@@ -1,11 +1,16 @@
-export const newHotspot = (event, hotspotsList) => {
-    const data = {
-      name: `Hotspot #${hotspotsList.length + 1}`,
-      positX: event.clientX,
-      positY: event.clientY,
-    };
+export const getHotspotList = () => {
+    const hotspotList = window.localStorage.getItem('hotspots');
+    const data = hotspotList ? JSON.parse(hotspotList) : [];
     return {
-        type: 'HOTSPOT_ADDED',
+        type: 'GET_HOTSPOT_LIST',
         payload: data,
     };
 };
+
+export const saveTexts = (text) => {
+    const data = Object.assign({}, text)
+    return {
+        type: 'POPOVER_TEXT_CHANGED',
+        payload: data,
+    }
+}
