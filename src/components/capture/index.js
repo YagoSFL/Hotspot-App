@@ -35,7 +35,6 @@ const Hotspots = ({ hotspotList }) => {
           const updatedData = Object.assign(
             [...hotspotList], {[index]:
               Object.assign({}, hotspotList[index], updatedTitle)})
-          console.log(updatedData)
           window.localStorage.setItem('hotspots', JSON.stringify(updatedData));
         }
         if (!hotspotList[index].message) {

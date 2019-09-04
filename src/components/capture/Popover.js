@@ -62,10 +62,24 @@ const SpotPopover = ({
                 <form onSubmit={handleSubmit}>
                   {title
                     ? <Title>{title}</Title>
-                    : (<Input name="title" onChange={handleChange} value={values.title} />)}
+                    : (
+                      <Input
+                        name="title"
+                        label="Title:"
+                        onChange={handleChange}
+                        value={values.title}
+                      />
+                    )}
                   {message
                     ? <Message>{message}</Message>
-                    : (<Input name="message" onChange={handleChange} value={values.message} />)}
+                    : (
+                      <Input
+                        name="message"
+                        label="Message:"
+                        onChange={handleChange}
+                        value={values.message}
+                      />
+                    )}
                   {!(title && message) && <button type="submit">Save</button>}
                 </form>
               )}
