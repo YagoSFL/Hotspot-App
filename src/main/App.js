@@ -5,13 +5,11 @@ import Page from '../components/page';
 
 const TESTE = ['Link fake1', 'Link fake2', 'Link fake3', 'Link fake4'];
 
-
-
 const App = () => {
-  const hotspots = useSelector(state => state.hotspots);
+  const hotspots = useSelector(state => state.hotspots.hotspotList);
 
   return (
-    <Page navLinks={TESTE} hotspots={hotspots} />
+    <Page navLinks={TESTE} hotspotList={hotspots} />
   );
 };
 

@@ -16,12 +16,16 @@ const StyledContainer = styled.div`
   font-family: Helvetica;
 `;
 
-const Page = ({ navLinks, hotspots }) => {
+const Page = ({ navLinks, hotspotList }) => {
   const [isCapturing, setCapturing] = useState(false);
 
   return (
     <StyledContainer>
-        <Capture show={isCapturing} onCapture={() => setCapturing(!isCapturing)}>
+        <Capture
+          show={isCapturing} 
+          onCapture={() => setCapturing(!isCapturing)}
+          hotspotList={hotspotList}
+        >
           <Header>
             <Logo src={LOGO} />
             <Navbar links={navLinks} />
@@ -29,7 +33,7 @@ const Page = ({ navLinks, hotspots }) => {
           <Divider />
           <Content>
             <NewHotspotButton onClick={() => setCapturing(!isCapturing)} />
-            {hotspots.length > 0 && <HotspotList hotspots={hotspots} />}
+            {hotspotList.length > 0 && <HotspotList list={hotspotList} />}
           </Content>
         </Capture>
       </StyledContainer>

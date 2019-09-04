@@ -10,6 +10,7 @@ const StyledNavbar = styled.ul`
 `
 
 const NavItem = styled.li`
+  font-size: 2rem;
   margin: 0 20px;
 `;
 
