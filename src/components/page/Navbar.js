@@ -10,14 +10,15 @@ const StyledNavbar = styled.ul`
 `
 
 const NavItem = styled.li`
+  font-size: 2rem;
   margin: 0 20px;
 `;
 
 const Navbar = ({ links }) => (
   <StyledNavbar>
     {links.map(item => (
-      <NavItem>
-        <Link>item</Link>
+      <NavItem key={item}>
+        <Link>{item}</Link>
       </NavItem>
     ))}
   </StyledNavbar>

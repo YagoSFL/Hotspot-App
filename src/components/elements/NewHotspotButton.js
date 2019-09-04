@@ -2,14 +2,18 @@ import React from 'react';
 import styled from 'styled-components';
 
 const StyledButton = styled.button`
-  background-color: #19f7ff;
+  font-size: 24px
+  background-color: #12c1c7;
   color: #fff;
   border-radius: 50px;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
 `;
 
 const NewHotspotButton = ({ onClick }) => (
   <StyledButton onClick={onClick}>
-    CREATE HOTSPOT
+    Create Hotspot
   </StyledButton>
 );
 
