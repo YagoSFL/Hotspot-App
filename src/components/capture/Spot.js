@@ -33,14 +33,27 @@ const Spot = ({
   verticalPosit,
   horizontalPosit,
   spotIndex,
+  hotspotList,
   title,
   message,
+  opened,
  }) => {
-  const [isOpen, setOpen] = useState(false);
+  const [isOpen, setOpen] = useState(opened || false);
+  const updateOpenedState = () => {
+    if (!hotspotList[spotIndex].title && !hotspotList[spotIndex].message) return setOpen(false);
+    const updateState = Object.assign(
+      {...hotspotList[spotIndex]}, 
+      { openedPopover: false });
+    const updatedData = Object.assign(
+      [...hotspotList], {[spotIndex]:
+        Object.assign({}, hotspotList[spotIndex], updateState)});
+    setOpen(false);
+    return window.localStorage.setItem('hotspots', JSON.stringify(updatedData)); 
+  }
   return (
     <SpotPopover
       isPopoverOpen={isOpen}
-      outSideClick={() => setOpen(false)}
+      outSideClick={() => updateOpenedState()}
       title={title}
       message={message}
     >
