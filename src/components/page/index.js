@@ -38,6 +38,6 @@ const Page = ({ navLinks, hotspotList }) => {
         </Capture>
       </StyledContainer>
   );
-}
+};
 
 export default Page;

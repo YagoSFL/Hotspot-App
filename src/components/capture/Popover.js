@@ -91,6 +91,6 @@ const SpotPopover = ({
       {children}
     </Popover>
   );
-}
+};
 
 export default SpotPopover;

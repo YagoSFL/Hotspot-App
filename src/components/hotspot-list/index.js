@@ -31,7 +31,7 @@ const removeSpot = (
   hotspotList.splice(key, 1);
   window.localStorage.setItem('hotspots', JSON.stringify(hotspotList));  
   dispatch(getHotspotList());
-}
+};
 
 const List = ({ list }) => {
   const disptach = useDispatch();
@@ -48,6 +48,6 @@ const List = ({ list }) => {
       </StyledList>
     </Container>
   );
-}
+};
 
 export default List;

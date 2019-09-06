@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux'
 
 import Spot from './Spot';
-import { getHotspotList } from '../../actions/hotspotActions';
+import { createNewSpot, updateSpots, getHotspotList } from '../../actions/hotspotActions';
 import useFetch from '../../hooks/useFetch';
 
 const CaptureOverlay = styled.div`
@@ -26,24 +26,18 @@ const updateSpotData = (hotspotList, texts, index) => {
     const updatedTitle = Object.assign(
       {...hotspotList[index]},
       { title: texts.title, message: updatedMessage });
-    const updatedData = Object.assign(
-      [...hotspotList], {[index]:
-        Object.assign({}, hotspotList[index], updatedTitle)})
-    return window.localStorage.setItem('hotspots', JSON.stringify(updatedData));
+    updateSpots(updatedTitle, index);
   }
   if (!hotspotList[index].message) {
     const updatedTitle = hotspotList[index].title ? hotspotList[index].title : texts.title;
     const updatedMessage = Object.assign(
       {...hotspotList[index]}, 
-      { title: updatedTitle, message: texts.message})
-    const updatedData = Object.assign(
-      [...hotspotList], {[index]:
-        Object.assign({}, hotspotList[index], updatedMessage)})
-    return window.localStorage.setItem('hotspots', JSON.stringify(updatedData));   
+      { title: updatedTitle, message: texts.message});
+    updateSpots(updatedMessage, index);
   }
 
   return null;
-}
+};
 
 const Hotspots = ({ hotspotList }) => {
   const texts = useSelector(state => state.hotspots.text);
@@ -68,28 +62,17 @@ const Hotspots = ({ hotspotList }) => {
       })}
     </>
   );
-} 
+};
 
 const hotspotCapture = (
   event,
   toggleCapture,
   dispatch,
-  hotspotList,
 ) => {
   event.preventDefault();
-  const data = {
-    name: `Hotspot #${hotspotList.length + 1}`,
-    positX: event.clientX,
-    positY: event.clientY,
-    title: null,
-    message: null,
-    openedPopover: true,
-  };
-  hotspotList.push(data);
-  window.localStorage.setItem('hotspots', JSON.stringify(hotspotList));  
-  dispatch(getHotspotList());
-  toggleCapture()
-}
+  dispatch(createNewSpot(event.clientX, event.clientY));
+  toggleCapture();
+};
 
 const Capture = ({ show, children, onCapture, hotspotList }) => {
   const dispatch = useDispatch();
@@ -112,6 +95,6 @@ const Capture = ({ show, children, onCapture, hotspotList }) => {
       )}
     </>
   );
-}
+};
 
 export default Capture;

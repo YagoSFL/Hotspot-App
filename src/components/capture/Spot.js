@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
+
+import { updateSpots} from '../../actions/hotspotActions';
 import SpotPopover from './Popover';
 
 const SpotContainer = styled.div`
@@ -41,15 +43,12 @@ const Spot = ({
   const [isOpen, setOpen] = useState(opened || false);
   const updateOpenedState = () => {
     if (!hotspotList[spotIndex].title && !hotspotList[spotIndex].message) return setOpen(false);
-    const updateState = Object.assign(
+    const updatedState = Object.assign(
       {...hotspotList[spotIndex]}, 
       { openedPopover: false });
-    const updatedData = Object.assign(
-      [...hotspotList], {[spotIndex]:
-        Object.assign({}, hotspotList[spotIndex], updateState)});
     setOpen(false);
-    return window.localStorage.setItem('hotspots', JSON.stringify(updatedData)); 
-  }
+    updateSpots(updatedState, spotIndex);
+  };
   return (
     <SpotPopover
       isPopoverOpen={isOpen}
@@ -68,6 +67,6 @@ const Spot = ({
       </SpotContainer>
     </SpotPopover>
   );
-}
+};
 
 export default Spot;

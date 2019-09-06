@@ -7,7 +7,7 @@ const StyledNavbar = styled.ul`
   display: flex;
   list-style: none;
   width: 100%;
-`
+`;
 
 const NavItem = styled.li`
   font-size: 2rem;
